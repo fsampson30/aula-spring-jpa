@@ -4,10 +4,13 @@ import com.sampson.aulaspringjpa.model.User;
 import com.sampson.aulaspringjpa.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class UserController {
 
     private UserService userService;
@@ -16,8 +19,13 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/list-users")
+    @GetMapping("users")
     public List<User> getAllUsers(){
         return userService.getAllUsers();
+    }
+
+    @PostMapping("users")
+    public void saveUser(@RequestBody User user){
+        userService.saveUser(user);
     }
 }
